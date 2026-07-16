@@ -9,35 +9,32 @@ class CampScene extends Phaser.Scene {
         // Achtergrond
         this.cameras.main.setBackgroundColor("#69c56d");
 
-        // Grote wereld
-        this.world = this.add.graphics();
-
         // Gras
-        this.world.fillStyle(0x69c56d,1);
-        this.world.fillRect(0,0,2500,2500);
+        this.add.rectangle(1000, 1000, 2000, 2000, 0x69c56d);
 
         // Pad
-        this.world.fillStyle(0xd7bf8a,1);
-        this.world.fillRect(0,850,2500,180);
+        this.add.rectangle(1000, 900, 1800, 160, 0xd9b97a);
 
         // Meer
-        this.world.fillStyle(0x4aa8ff,1);
-        this.world.fillEllipse(1950,1750,650,450);
+        this.add.ellipse(1700, 1450, 500, 320, 0x4aa8ff);
 
         // Kantine
-        this.world.fillStyle(0x8a5a2b,1);
-        this.world.fillRect(1450,650,300,220);
+        this.add.rectangle(1350, 700, 260, 180, 0x8b5a2b);
+
+        this.add.text(1280,690,"KANTINE",{
+            fontSize:"18px",
+            color:"#ffffff"
+        });
 
         // Kampvuur
-        this.world.fillStyle(0xff7700,1);
-        this.world.fillCircle(1100,940,22);
+        this.add.circle(980,920,18,0xff7700);
 
         // Bomen
-        for(let i=0;i<30;i++){
+        for(let i=0;i<35;i++){
 
             this.add.circle(
-                Phaser.Math.Between(50,2450),
-                Phaser.Math.Between(50,2450),
+                Phaser.Math.Between(50,1950),
+                Phaser.Math.Between(50,1950),
                 28,
                 0x2f8d3d
             );
@@ -54,31 +51,16 @@ class CampScene extends Phaser.Scene {
 
         this.cursors=this.input.keyboard.createCursorKeys();
 
-        this.cameras.main.startFollow(this.player);
-
-        this.cameras.main.setZoom(1.3);
-
     }
 
     update(){
 
-        let speed=4;
+        const speed=5;
 
-        if(this.cursors.left.isDown){
-            this.player.x-=speed;
-        }
-
-        if(this.cursors.right.isDown){
-            this.player.x+=speed;
-        }
-
-        if(this.cursors.up.isDown){
-            this.player.y-=speed;
-        }
-
-        if(this.cursors.down.isDown){
-            this.player.y+=speed;
-        }
+        if(this.cursors.left.isDown) this.player.x-=speed;
+        if(this.cursors.right.isDown) this.player.x+=speed;
+        if(this.cursors.up.isDown) this.player.y-=speed;
+        if(this.cursors.down.isDown) this.player.y+=speed;
 
     }
 
@@ -86,15 +68,21 @@ class CampScene extends Phaser.Scene {
 
 new Phaser.Game({
 
-    type: Phaser.AUTO,
+    type:Phaser.AUTO,
 
-    width: 1280,
+    width:1920,
 
-    height: 720,
+    height:1080,
 
     parent:"game",
 
     backgroundColor:"#69c56d",
 
     scale:{
-        mode:
+        mode:Phaser.Scale.FIT,
+        autoCenter:Phaser.Scale.CENTER_BOTH
+    },
+
+    scene:[CampScene]
+
+});
