@@ -1,28 +1,16 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-  <title>Camping de Genots Knots</title>
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width,initial-scale=1">
 
-  <script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js"></script>
+<title>Camping de Genots Knots</title>
 
-  <style>
-    html, body {
-      margin:0;
-      padding:0;
-      overflow:hidden;
-      background:#202020;
-      touch-action:none;
-      font-family:Arial;
-    }
+<link rel="stylesheet" href="style.css">
 
-    #game{
-      width:100vw;
-      height:100vh;
-    }
-  </style>
+<script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js"></script>
 
 </head>
 
@@ -30,99 +18,7 @@
 
 <div id="game"></div>
 
-<script>
-
-class CampScene extends Phaser.Scene{
-
-    constructor(){
-        super("camp");
-    }
-
-    preload(){
-
-    }
-
-    create(){
-
-        this.cameras.main.setBackgroundColor("#5bbf5b");
-
-        this.add.text(
-            20,
-            20,
-            "Camping de Genots Knots",
-            {
-                fontSize:"32px",
-                color:"#ffffff"
-            }
-        );
-
-        this.add.text(
-            20,
-            70,
-            "Version 0.1",
-            {
-                fontSize:"18px",
-                color:"#ffffff"
-            }
-        );
-
-        this.player=this.add.circle(
-            300,
-            300,
-            18,
-            0x3498db
-        );
-
-        this.cursors=this.input.keyboard.createCursorKeys();
-
-    }
-
-    update(){
-
-        const speed=4;
-
-        if(this.cursors.left.isDown){
-            this.player.x-=speed;
-        }
-
-        if(this.cursors.right.isDown){
-            this.player.x+=speed;
-        }
-
-        if(this.cursors.up.isDown){
-            this.player.y-=speed;
-        }
-
-        if(this.cursors.down.isDown){
-            this.player.y+=speed;
-        }
-
-    }
-
-}
-
-new Phaser.Game({
-
-    type:Phaser.AUTO,
-
-    parent:"game",
-
-    width:800,
-
-    height:600,
-
-    backgroundColor:"#5bbf5b",
-
-    scale:{
-        mode:Phaser.Scale.RESIZE,
-        autoCenter:Phaser.Scale.CENTER_BOTH
-    },
-
-    scene:[CampScene]
-
-});
-
-</script>
+<script src="main.js"></script>
 
 </body>
 </html>
