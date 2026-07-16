@@ -1,96 +1,68 @@
-class CampScene extends Phaser.Scene{
+class CampScene extends Phaser.Scene {
 
-    constructor(){
+    constructor() {
         super("CampScene");
     }
 
-    preload(){
+    create() {
 
-    }
+        // Achtergrond
+        this.cameras.main.setBackgroundColor("#69c56d");
 
-    create(){
-this.cameras.main.startFollow(this.player);
-this.cameras.main.setZoom(1.4);
-this.cameras.main.setBounds(0,0,2000,2000);
-        
-        this.cameras.main.setBackgroundColor("#63c76a");
-// Wereld vergroten
-this.physics.world.setBounds(0, 0, 2000, 2000);
+        // Grote wereld
+        this.world = this.add.graphics();
 
-// Gras
-const grass = this.add.graphics();
+        // Gras
+        this.world.fillStyle(0x69c56d,1);
+        this.world.fillRect(0,0,2500,2500);
 
-grass.fillStyle(0x63c76a, 1);
-grass.fillRect(0, 0, 2000, 2000);
+        // Pad
+        this.world.fillStyle(0xd7bf8a,1);
+        this.world.fillRect(0,850,2500,180);
 
-// Pad
-grass.fillStyle(0xc9b07b, 1);
-grass.fillRect(250, 820, 1500, 180);
+        // Meer
+        this.world.fillStyle(0x4aa8ff,1);
+        this.world.fillEllipse(1950,1750,650,450);
 
-// Meer
-grass.fillStyle(0x4ea8de, 1);
-grass.fillEllipse(1650, 1450, 500, 350);
+        // Kantine
+        this.world.fillStyle(0x8a5a2b,1);
+        this.world.fillRect(1450,650,300,220);
 
-// Kampvuur
-grass.fillStyle(0xff7b00, 1);
-grass.fillCircle(980, 940, 18);
+        // Kampvuur
+        this.world.fillStyle(0xff7700,1);
+        this.world.fillCircle(1100,940,22);
 
-// Kantine
-grass.fillStyle(0x6b4f2a, 1);
-grass.fillRect(1180, 640, 240, 170);
+        // Bomen
+        for(let i=0;i<30;i++){
 
-// Tenten
-grass.fillStyle(0xd9d9d9, 1);
+            this.add.circle(
+                Phaser.Math.Between(50,2450),
+                Phaser.Math.Between(50,2450),
+                28,
+                0x2f8d3d
+            );
 
-grass.fillTriangle(
-300,350,
-380,430,
-220,430
-);
+        }
 
-grass.fillTriangle(
-650,300,
-730,380,
-570,380
-);
-
-grass.fillTriangle(
-980,340,
-1060,420,
-900,420
-);
-        this.add.text(
-            20,
-            20,
-            "Camping de Genots Knots",
-            {
-                font:"32px Arial",
-                color:"#ffffff"
-            }
-        );
-
-        this.player = this.physics.add.image(
-400,
-900,
-null
-);
-
-this.player.setCircle(18);
-
-this.player.setTint(0x3498db);
-            400,
-            300,
+        // Hendrik
+        this.player=this.add.circle(
+            500,
+            900,
             18,
             0x3498db
         );
 
         this.cursors=this.input.keyboard.createCursorKeys();
 
+        this.cameras.main.startFollow(this.player);
+
+        this.cameras.main.setZoom(1.3);
+
     }
 
     update(){
 
-        const speed=4;
+        let speed=4;
 
         if(this.cursors.left.isDown){
             this.player.x-=speed;
@@ -114,21 +86,15 @@ this.player.setTint(0x3498db);
 
 new Phaser.Game({
 
-    type:Phaser.AUTO,
+    type: Phaser.AUTO,
 
-    width:800,
+    width: 1280,
 
-    height:600,
-
-    backgroundColor:"#63c76a",
+    height: 720,
 
     parent:"game",
 
+    backgroundColor:"#69c56d",
+
     scale:{
-        mode:Phaser.Scale.FIT,
-        autoCenter:Phaser.Scale.CENTER_BOTH
-    },
-
-    scene:[CampScene]
-
-});
+        mode:
