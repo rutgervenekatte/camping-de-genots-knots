@@ -9,7 +9,10 @@ class CampScene extends Phaser.Scene{
     }
 
     create(){
-
+this.cameras.main.startFollow(this.player);
+this.cameras.main.setZoom(1.4);
+this.cameras.main.setBounds(0,0,2000,2000);
+        
         this.cameras.main.setBackgroundColor("#63c76a");
 // Wereld vergroten
 this.physics.world.setBounds(0, 0, 2000, 2000);
